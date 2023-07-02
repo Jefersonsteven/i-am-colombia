@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123postgressql
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      -   PGADMIN_DEFAULT_EMAIL=admin@mail.com
+      -   PGADMIN_DEFAULT_PASSWORD=C
+    ports:
+      - 5050:80
