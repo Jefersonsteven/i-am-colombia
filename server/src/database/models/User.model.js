@@ -31,6 +31,10 @@ module.exports = (sequelize) => {
         defaultValue: Sequelize.NOW,
         field: "create_at",
       },
+      logged: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       timestamps: false,
