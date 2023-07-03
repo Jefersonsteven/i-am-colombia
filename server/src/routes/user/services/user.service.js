@@ -11,14 +11,23 @@ class Users {
   async createUser(req, res) {
     try {
       const { name, email, password } = req.body;
+      const user = await User.findOne({
+        where: {
+          email,
+        },
+      });
 
-      const user = await User.create({
+      if (user) {
+        return { message: "User already exists" };
+      }
+
+      const newUser = await User.create({
         name,
         email,
         password,
       });
 
-      return user;
+      return newUser;
     } catch (error) {
       return { message: error.message };
     }
@@ -27,7 +36,7 @@ class Users {
   async getUser(req, res) {
     try {
       const { idUser } = req.params;
-      console.log("Entre");
+
       const user = await User.findByPk(idUser, {
         include: {
           model: Favorite,
